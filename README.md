@@ -1,6 +1,6 @@
 # Contact-Manager.
-This is website for storing personel contacts safely by making personel account  where u have your login account.
-in this website i used springboot ,Hibernate (jpa),HTML,CSS,javascript and thymleaf.
+This website is for storing personel contacts safely by creating personel account  where u have your login account.
+This website is based on springboot,java ,Hibernate (jpa),HTML,CSS,javascript and thymleaf.
 jdk-20 and tomcat server -10.
 Database-smartcontact.
 there are two tables User and Contact.
