@@ -1,0 +1,113 @@
+<!doctype html>
+<!--this is normal base -->
+<html lang="en" xmlns:="http://www.thymeleaf.org" th:fragment="layout(content)">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title th:text="${title}">Base page</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+
+	<!--this is below font awesome 5 cdn liks-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+</head>
+
+<body>
+	<!--starting of navbar-->
+	<nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-primary ">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Smart Contact Manager</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" th:href="@{/home}">HOME</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link" href="#"><span th:text="${user.name}"></span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/logout}">LOGOUT</a>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+
+	<!--ending of navbar-->
+
+	<!--sidebar-->
+
+	<div class="sidebar mt-2">
+
+		<span onclick="toggleSidebar()" class="crossbtn">&times;</span>
+
+		<a th:href="@{/user/index}" class="item"><i class="fa-solid fa-house"></i>Home</a>
+		<a th:href="@{/user/show-contacts/0}" class="item"><i class="fa-solid fa-address-book"></i>View Contacts</a>
+		<a th:href="@{/user/add-contact}" class="item"><i class="fa-solid fa-user-plus fa-bounce"></i>Add Contact</a>
+		<a th:href="@{/user/profile}" class="item"><i class="fa-solid fa-address-card "></i>Your Profile</a>
+		<a href="#" class="item"><i class="fas fa-cogs"></i>Settings</a>
+		<a th:href="@{/logout}" class="item"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+		<div class="divider"></div>
+	</div>
+	<!--end of sidebar-->
+
+	<!--starting of content area-->
+	<div class="content mt-5">
+		<i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+		<!--message box-->
+		<div th:if="${session.message}" class="container">
+			<div th:classappend="${'alert-'+ session.message.type}" class="alert  text-center" role="alert">
+				<span th:text="${session.message.content}"></span>
+				<div>
+					<th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+				</div>
+			</div>
+		</div>
+		<div th:replace="${content}"></div>
+	</div>
+	<!--ending of content area-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+		integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+		crossorigin="anonymous"></script>
+	<!--this link below is from bootstrap 4 because bootstrap 5 do not have-->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+
+	<!--thi is sweet alert link-->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!--sweetalert 2 link-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+	<script th:src="@{/js/myjs.js}"></script>
+	<script th:src="@{/js/sweetalert.min.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>User Dashboard</title>
+</head>
+
+<body>
+	<section>
+		<div class="card me-3 ms-3 ">
+			<div class="card-body">
+				<h1 class="text-center">Add Contact</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-10 offset-md-1">
+							<form th:action="@{/user/process-contact}" method="post" enctype="multipart/form-data"
+								th:object="${contact}">
+								<!--first name-->
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text me-3">
+											<i class="fa fa-plus"></i>
+										</div>
+									</div>
+									<input type="text" class="form-control"
+										th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}" name="name"
+										placeholder="Enter Name here" th:value="${contact.name}" id="firstName" />
+									<div th:each="e :${#fields.errors('name')}" th:text="${e}"
+										id="validationServer03Feedback" class="invalid-feedback"></div>
+								</div>
+								<!--second name-->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text me-3">
+											<i class="fas fa-user-alt"></i>
+										</div>
+									</div>
+									<input type="text" class="form-control" name="secondName"
+										placeholder="Enter Nick Name here" th:value="${contact.secondName}"
+										id="secondName" />
+								</div>
+								<!--phone field-->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text me-3">
+											<i class="fa fa-phone"></i>
+										</div>
+									</div>
+									<input type="number" class="form-control"
+										th:classappend="${#fields.hasErrors('phone')? 'is-invalid' : ''}" name="phone"
+										placeholder="Enter Phone Number here" th:value="${contact.phone}" id="phone" />
+									<div th:each="e :${#fields.errors('phone')}" th:text="${e}"
+										id="validationServer03Feedback" class="invalid-feedback"></div>
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text me-3">
+											<!--<i class="fa fa-envelop"></i>-->
+											@
+										</div>
+									</div>
+									<input type="email" class="form-control" name="email"
+										th:classappend="${#fields.hasErrors('email')? 'is-invalid' : ''}"
+										placeholder="Enter Email here" id="email" th:value="${contact.email}" />
+									<div th:each="e :${#fields.errors('email')}" th:text="${e}"
+										id="validationServer03Feedback" class="invalid-feedback"></div>
+								</div>
+								<!--work field -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text me-3">
+											<i class="fa fa-briefcase"></i>
+										</div>
+									</div>
+									<input type="text" class="form-control" th:value="${contact.work}" name="work"
+										placeholder="Enter Work here" id="work" />
+								</div>
+
+								<div class="form-group mt-3">
+									<textarea name="description" id="textarea" class="form-control" rows="10"
+										placeholder="Enter Contact description"
+										th:text="${contact.description}"></textarea>
+								</div>
+								<!--Contact image-->
+								<div class="custom-file mt-3">
+									<input type="file" name="image" th:class="form-control" />
+
+								</div>
+
+								<div class="container text-center mt-3">
+									<button class="btn btn-outline-primary">Save Contact</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--tiny mce-->
+		<script type="text/javascript" src='https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js'
+			referrerpolicy="origin">
+			</script>
+		<script>
+			tinymce.init({
+				selector: 'textarea'
+			});
+		</script>
+
+	</section>
+</body>
+
+</html>
